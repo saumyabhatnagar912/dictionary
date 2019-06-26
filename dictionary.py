@@ -4,10 +4,14 @@ from difflib import get_close_matches
 data = json.load(open("data.json"))
 
 query = input("Enter a word: ")
-query = query.lower()
+
 def find_meaning(w):
     if w in data:
         return data[w]
+    elif w.lower() in data:
+        return data[w.lower()]
+    elif w.upper() in data:
+        return data[w.upper()]
     elif len(get_close_matches(w,data.keys())) > 0:
         print("Did you mean %s?" %get_close_matches(w,data.keys())[0])
         user_input = input("Type Y for yes, N for no: ")
